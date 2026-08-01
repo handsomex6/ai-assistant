@@ -17,10 +17,11 @@ python3 ~/Documents/ai-assistant/scripts/xhs-extract.py "<链接>" --obsidian-di
 
 读取提取的文件，分析后将结果写入笔记的「📊 Scout 分析」区（替换「（待分析）」），更新 frontmatter 中 `status: analyzed`。
 
-### 3. 归档
+### 3. 归档（必须）
 
-- 分析完成后，在 `acquisition/overview.md` 的「📊 最新研究」区追加链接：`- [[笔记文件名]] — 一句话结论`
-- 内容只存一份（`sources/xiaohongshu/` 下的笔记），overview 只做索引
+分析完成后，必须更新 `acquisition/overview.md`：
+- 在「📊 最新研究」区追加：`- [[笔记文件名]] — 一句话结论`
+- 不更新 overview 等于任务未完成
 
 ## 输出格式
 
