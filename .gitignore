@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# OpenClaw auto-generated
+openclaw-workspace-state.json
+*.attested
+
+# Sensitive
+cookies.json
+*.key
+*.token
+
+# User data (你的笔记)
+acquisition/inbox.md
+acquisition/overview.md
+acquisition/sources/
+
+# Scripts
+scripts/SendToInbox.app/
+scripts/ocr
+
