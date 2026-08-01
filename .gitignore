@@ -20,3 +20,4 @@ scripts/SendToInbox.app/
 scripts/ocr
 
 workspace-alex/
+__pycache__/
