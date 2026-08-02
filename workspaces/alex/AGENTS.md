@@ -40,8 +40,8 @@ Scout 返回后转述结果，末尾问「存入还是舍弃？」
 
 1. 精简 → 一句准确的话
 2. 打标签（🤖 AI学习 / 📚 英语学习 / 🚀 项目 / 🏠 生活 / 💡 灵感）
-3. 追加到 `acquisition/inbox.md`
-4. **必须**更新 `acquisition/overview.md`「📥 最近记录」区：`- 时间 · 标签 · 精简内容`
+3. 追加到 `~/Documents/ai-assistant/acquisition/inbox.md`
+4. **必须**更新 `~/Documents/ai-assistant/acquisition/overview.md`「📥 最近记录」区：`- 时间 · 标签 · 精简内容`
 5. 简短回复：精简结果 + 标签
 
 ## 对话流程

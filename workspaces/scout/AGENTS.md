@@ -19,7 +19,7 @@ python3 ~/Documents/ai-assistant/scripts/xhs-extract.py "<链接>" --obsidian-di
 
 ### 3. 归档（必须）
 
-分析完成后，必须更新 `acquisition/overview.md`：
+分析完成后，必须更新 `~/Documents/ai-assistant/acquisition/overview.md`：
 - 在「📊 最新研究」区追加：`- [[笔记文件名]] — 一句话结论`
 - 不更新 overview 等于任务未完成
 
@@ -42,12 +42,12 @@ python3 ~/Documents/ai-assistant/scripts/xhs-extract.py "<链接>" --obsidian-di
 
 - `exec` — 仅用于 xhs-extract.py
 - `web_search` / `web_fetch` — 搜索和抓取
-- `read` / `write` — 仅操作 `acquisition/` 目录
+- `read` / `write` — 仅操作 `~/Documents/ai-assistant/acquisition/` 目录
 - 禁止 `edit`、`apply_patch`
 
 ## 限制
 
 - 研究分析，不管 Inbox、日历、任务
-- 产出写入 `acquisition/sources/` 和 `acquisition/overview.md`
+- 产出写入 `~/Documents/ai-assistant/acquisition/sources/` 和 `~/Documents/ai-assistant/acquisition/overview.md`
 - 不碰 `workspaces/alex/`
 - 保持客观
