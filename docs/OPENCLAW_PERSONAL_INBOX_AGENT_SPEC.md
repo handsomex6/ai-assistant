@@ -1,8 +1,19 @@
 # OpenClaw Personal Inbox Agent Specification
 
-## 项目名称
+> ⚠️ **历史文档**：原始设计规格书。实际实现已演进为 `ai-assistant` 项目，架构差异见下方。
 
-Personal Inbox Agent
+## 原始目标 vs 实际实现
+
+| | 原始设计 | 实际实现 |
+|------|------|------|
+| 项目名 | personal-inbox-agent | **ai-assistant** |
+| 数据层 | `second-brain/`（在 Alex workspace 下） | **`acquisition/`**（独立于 Agent） |
+| Agent 数 | 1（Alex 全干） | **2**（Alex 总管 + Scout 研究员） |
+| 渠道 | Obsidian 展示 | **微信 + Telegram + WhatsApp** |
+| 小红书 | 不支持 | **提取 + OCR + Whisper 转录** |
+| 展示 | dashboard.md | **overview.md** |
+
+以下为原始规格书内容（仅供参考）。
 
 # 1. 项目目标
 

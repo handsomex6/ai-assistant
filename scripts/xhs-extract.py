@@ -84,17 +84,30 @@ def fetch_note(url, cookie_str):
     # 绕过 SSL 验证问题
     ctx = ssl.create_default_context()
 
-    req = urllib.request.Request(url)
-    req.add_header("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
-    req.add_header("Cookie", cookie_str)
-    req.add_header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-    req.add_header("Accept-Language", "zh-CN,zh;q=0.9")
+    # 桌面 UA 优先，失败时回退到 iPhone UA（新页面结构对移动端更友好）
+    user_agents = [
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
+    ]
 
-    try:
-        with urllib.request.urlopen(req, timeout=15, context=ctx) as resp:
-            html_content = resp.read().decode("utf-8", errors="ignore")
-    except Exception as e:
-        print(f"❌ 请求失败: {e}")
+    html_content = None
+    last_error = None
+    for ua in user_agents:
+        req = urllib.request.Request(url)
+        req.add_header("User-Agent", ua)
+        req.add_header("Cookie", cookie_str)
+        req.add_header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
+        req.add_header("Accept-Language", "zh-CN,zh;q=0.9")
+        try:
+            with urllib.request.urlopen(req, timeout=15, context=ctx) as resp:
+                html_content = resp.read().decode("utf-8", errors="ignore")
+            break
+        except Exception as e:
+            last_error = e
+            continue
+
+    if html_content is None:
+        print(f"❌ 请求失败: {last_error}")
         sys.exit(1)
 
     # 提取 __INITIAL_STATE__
@@ -135,6 +148,10 @@ def extract_note_data(state):
     if note_detail_map:
         note_id = list(note_detail_map.keys())[0]
         note_data = note_detail_map[note_id].get("note", {})
+
+    if not note_data:
+        # 新页面结构: noteData.data.noteData（iPhone UA 抓取时的路径）
+        note_data = state.get("noteData", {}).get("data", {}).get("noteData", {})
 
     if not note_data:
         print("❌ 无法从页面数据中提取笔记内容")

@@ -9,17 +9,14 @@ description: Delegate deep research and link analysis to the Scout agent
 
 ## 执行
 
-**注意：你没有 sessions_spawn 权限，必须使用 exec。**
+使用 `sessions_send(agent: "scout", message: "<研究请求>")` 委派（⚠️ 不要用 sessions_spawn，已损坏）。
 
-```bash
-openclaw agent --agent scout --message "<研究请求>" --thinking low --timeout 120
-```
-
-Scout 会返回分析结果。收到后用你的语气转述给用户。禁止自己分析。
+Scout 返回后，用你的语气转述结果，末尾问「存入还是舍弃？」。禁止自己分析。
 
 ## 失败处理
 
 | 情况 | 行动 |
 |------|------|
-| 命令失败/超时 | 告知用户 "Scout 暂时不可用"，自己处理 |
+| Scout 超时 | 告知用户 "Scout 卡住了，要不直接告诉我内容我帮你看？" |
 | Scout 返回 "不是研究任务" | 自己处理 |
+| sessions_send 失败 | 降级自己处理 |
