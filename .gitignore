@@ -10,10 +10,12 @@ cookies.json
 *.key
 *.token
 
-# User data (你的笔记)
-acquisition/inbox.md
-acquisition/overview.md
+# User data (你的笔记，不进 git)
 acquisition/sources/
+acquisition/inbox.md
+
+# overview 进版本控制（系统元数据）
+# acquisition/overview.md — tracked
 
 # Scripts
 scripts/SendToInbox.app/
