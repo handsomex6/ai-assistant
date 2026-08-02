@@ -159,6 +159,16 @@ def extract_note_data(state):
 
     return note_data
 
+def _safe_int(value, default=0):
+    """安全转 int：None / 空字符串 / 非数字 → default"""
+    try:
+        if value is None or value == "":
+            return default
+        return int(value)
+    except (ValueError, TypeError):
+        return default
+
+
 def parse_note(note_data):
     """解析笔记字段"""
     result = {
@@ -188,9 +198,9 @@ def parse_note(note_data):
 
     # 互动数据
     interact = note_data.get("interactInfo", {})
-    result["likes"] = interact.get("likedCount", 0)
-    result["collects"] = interact.get("collectedCount", 0)
-    result["comments"] = interact.get("commentCount", 0)
+    result["likes"] = _safe_int(interact.get("likedCount"))
+    result["collects"] = _safe_int(interact.get("collectedCount"))
+    result["comments"] = _safe_int(interact.get("commentCount"))
 
     # 标签
     for tag in note_data.get("tagList", []):
